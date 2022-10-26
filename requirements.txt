@@ -1,7 +1,6 @@
 tqdm 
 datasets
 matplotlib
-import os
 seaborn
 torch
 transformers

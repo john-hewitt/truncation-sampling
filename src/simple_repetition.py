@@ -14,18 +14,20 @@ argp = argparse.ArgumentParser()
 argp.add_argument('warper')
 argp.add_argument('--seed', type=int, default=0)
 argp.add_argument('--model_string', default='gpt2-large')
+argp.add_argument('--cache_dir', default=None)
+argp.add_argument('--device', default='cuda')
 args = argp.parse_args()
 
 torch.manual_seed(args.seed)
 
-device = 'cuda'
+device = args.device
 
 try:
-  model = transformers.GPT2LMHeadModel.from_pretrained(args.model_string, cache_dir='/u/scr/nlp/johnhew/data/huggingface').to(device)
-  tokenizer = transformers.GPT2Tokenizer.from_pretrained(args.model_string, cache_dir='/u/scr/nlp/johnhew/data/huggingface')
+  model = transformers.GPT2LMHeadModel.from_pretrained(args.model_string, cache_dir=args.cache_dir).to(device)
+  tokenizer = transformers.GPT2Tokenizer.from_pretrained(args.model_string, cache_dir=args.cache_dir)
 except requests.exceptions.HTTPError:
-  model = transformers.GPT2LMHeadModel.from_pretrained(args.model_string, cache_dir='/u/scr/nlp/johnhew/data/huggingface', local_files_only=True).to(device)
-  tokenizer = transformers.GPT2Tokenizer.from_pretrained(args.model_string, cache_dir='/u/scr/nlp/johnhew/data/huggingface', local_files_only=True)
+  model = transformers.GPT2LMHeadModel.from_pretrained(args.model_string, cache_dir=args.cache_dir, local_files_only=True).to(device)
+  tokenizer = transformers.GPT2Tokenizer.from_pretrained(args.model_string, cache_dir=args.cache_dir, local_files_only=True)
 model.config.pad_token_id = model.config.eos_token_id
 
 model.eval()

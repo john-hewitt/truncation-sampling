@@ -26,6 +26,7 @@ argp.add_argument('--dataset_name', default = 'webtext')
 argp.add_argument('--max_length', type=int, default = 512)
 argp.add_argument('--prefix_length', type=int, default=1)
 argp.add_argument('--model_string', default = 'gpt2-xl')
+argp.add_argument('--cache_dir', default = None)
 argp.add_argument('--device', default = 'cuda')
 argp.add_argument('--seed', default=-1, type=int)
 argp.add_argument('--name', default='out')
@@ -36,11 +37,11 @@ if args.seed >= 0:
   random.seed(args.seed)
 
 try:
-  model = transformers.GPT2LMHeadModel.from_pretrained(args.model_string, cache_dir='/u/scr/nlp/johnhew/data/huggingface').to(args.device)
-  tokenizer = transformers.GPT2Tokenizer.from_pretrained(args.model_string, cache_dir='/u/scr/nlp/johnhew/data/huggingface')
+  model = transformers.GPT2LMHeadModel.from_pretrained(args.model_string, cache_dir=args.cache_dir).to(args.device)
+  tokenizer = transformers.GPT2Tokenizer.from_pretrained(args.model_string, cache_dir=args.cache_dir)
 except urllib.error.URLError:
-  model = transformers.GPT2LMHeadModel.from_pretrained(args.model_string, cache_dir='/u/scr/nlp/johnhew/data/huggingface', local_files_only=True).to(args.device)
-  tokenizer = transformers.GPT2Tokenizer.from_pretrained(args.model_string, cache_dir='/u/scr/nlp/johnhew/data/huggingface', local_files_only=True)
+  model = transformers.GPT2LMHeadModel.from_pretrained(args.model_string, cache_dir=args.cache_dir, local_files_only=True).to(args.device)
+  tokenizer = transformers.GPT2Tokenizer.from_pretrained(args.model_string, cache_dir=args.cache_dir, local_files_only=True)
 model.config.pad_token_id = model.config.eos_token_id
 
 model.eval()
