@@ -42,7 +42,9 @@ See the `README.md` in the `human_eval` directory for more details.
 
 To run the repetition analysis (Section 5.4), run
 
-        python src/simple_repetition.py
+        python src/simple_repetition.py 
+                --model_string {gpt2,gpt2_medium,gpt2_large,gpt2_xl}
+                {p,t,e,h} # top-p, typical, epsilon, eta
 
 ### Entropy Analysis
 
@@ -54,4 +56,4 @@ To run the entropy analysis (Section 5.3), run
 
 To run the individual distribution analysis (Section 5.4), run
 
-        python src/make_cutoff_plots.py
+        python src/make_cutoff_plots.py 
