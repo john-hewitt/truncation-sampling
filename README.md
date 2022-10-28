@@ -1,7 +1,7 @@
 # truncation-sampling
 
 This repository describes experiments for the paper
-_Truncation Sampling as Language Model Desmoothing_, comparing and evaluating
+[_Truncation Sampling as Language Model Desmoothing_](https://arxiv.org/pdf/2210.15191.pdf), comparing and evaluating
 existing truncation sampling methods like top-p (nucleus), typical decoding
 , and new methods epsilon sampling and our proposed eta sampling.
 
@@ -57,3 +57,17 @@ To run the entropy analysis (Section 5.3), run
 To run the individual distribution analysis (Section 5.4), run
 
         python src/make_cutoff_plots.py 
+
+## Citation
+
+If this work is useful to you, please cite it with 
+
+```
+@inproceedings{hewitt2022truncation,
+ author = {Hewitt, John and Manning, Christopher D. and Liang, Percy},
+ booktitle = {Findings of the Conference on Empirical Methods in Natural Language Processing  (Findings of EMNLP)},
+ title = {Truncation Sampling as Language Model Desmoothing},
+ url= {https://arxiv.org/pdf/2210.15191.pdf},
+ year = {2022}
+}
+```
